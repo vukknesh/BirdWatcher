@@ -1,0 +1,57 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+a:hover {
+  color: black;
+}
+.total {
+  background-color: #003580;
+}
+
+.container {
+  max-width: 1110px;
+  min-height: 50px;
+  width: 100%;
+  margin: 0 auto;
+}
+.logo {
+  top: 12px;
+  width: 150px;
+}
+
+.borderlight {
+  border: 0.5px white solid;
+  padding: 7px 10px;
+  font-size: 12px;
+  background-color: transparent;
+  border-radius: 3px;
+  line-height: 18px;
+  font-weight: bold;
+}
+button:hover {
+  color: lightgreen;
+  cursor: pointer;
+}
+.text-white {
+  color: white;
+}
+.menu {
+  float: right;
+}
+.menu,
+li {
+  justify-content: left;
+  text-decoration: none;
+  display: inline;
+  padding: 10px;
+}
+
+.bottom {
+  height: 50px;
+  margin: 15px;
+}
