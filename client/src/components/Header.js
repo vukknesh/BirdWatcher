@@ -4,12 +4,14 @@ export default class Header extends Component {
   render() {
     return (
       <div className="total">
-        <div className="container  text-white">
+        <div className="container">
           <div className="logo">
-            <p>BirdWatcher.com</p>
+            <p>
+              BirdWatcher<span className="com">.com</span>
+            </p>
           </div>
           <div className="menu">
-            <ul>
+            <ul className="user_center_nav">
               <li>
                 <a href="#">R$</a>
               </li>
@@ -17,9 +19,7 @@ export default class Header extends Component {
                 <a href="#">Br</a>
               </li>
               <li>
-                <button className="borderlight text-white">
-                  Register as a guide
-                </button>
+                <button className="borderlight">Register as a guide</button>
               </li>
               <li>
                 <button>Register</button>
