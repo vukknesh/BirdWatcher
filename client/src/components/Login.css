@@ -4,6 +4,23 @@
   width: 100%;
   display: flex;
 }
+
+.signin-right {
+  position: absolute;
+  display: inline-block;
+  right: 5px;
+}
+.signin-right input {
+  padding: 12px;
+  box-sizing: border-box;
+  margin-top: 12px;
+  margin: 0;
+  border: 1px solid #e6ecf0;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: start;
+}
 .subcontainer1 {
   background: #1da1f2;
   color: white;

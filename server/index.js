@@ -9,17 +9,18 @@ const knex = require("knex");
 const db = knex({
   client: "pg",
   connection: {
-    host: "localhost:3001",
-    user: "postgre",
+    host: "localhost",
+    user: "postgres",
     password: "admin",
     database: "birdwatcher"
   }
 });
-console.log(db.select("*").from("users"));
 
-const database = {
-  users: []
-};
+db.select("*")
+  .from("users")
+  .then(data => {
+    console.log(data);
+  });
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -28,23 +29,79 @@ app.get("/", (req, res) => {
   res.send(database.users);
 });
 
+app.post("/signin", (req, res) => {
+  db.select("email", "hash")
+    .from("login")
+    .where("email", "=", req.body.email)
+    .then(data => {
+      const isValid = bcrypt.compareSync(req.body.password, data[0].hash);
+      console.log(isValid);
+      if (isValid) {
+        return db
+          .select("*")
+          .from("users")
+          .where("email", "=", req.body.email)
+          .then(user => {
+            res.json(user[0]);
+          })
+          .catch(err => {
+            res.status(400).json("unable to get user");
+          });
+      } else {
+        res.status(400).json("invalid password or email");
+      }
+    })
+    .catch(err => res.status(400).json("wrong pass or email"));
+});
+
 app.post("/register", (req, res) => {
   const { email, name, password } = req.body;
-  database.users.push({
-    id: "1234",
-    name,
-    email,
-    password
-  });
-  res.send("sucess");
+  const hash = bcrypt.hashSync(password);
+  db.transaction(trx => {
+    trx
+      .insert({
+        hash: hash,
+        email: email
+      })
+      .into("login")
+      .returning("email")
+      .then(loginEmail => {
+        return trx("users")
+          .returning("*")
+          .insert({
+            email: loginEmail[0],
+            name: name,
+            joined: new Date()
+          })
+          .then(user => {
+            res.json(user[0]);
+          });
+      })
+      .then(trx.commit)
+      .catch(trx.rollback);
+  }).catch(err => res.status(400).json("email alredy exists"));
 });
 
-app.post("/register", (req, res) => {
-  bcrypt.hash("alouu", null, null, function(err, hash) {
-    console.log(hash);
-  });
+app.get("/profile/:id", (req, res) => {
+  const { id } = req.params;
+
+  db.select("*")
+    .from("users")
+    .where({ id: id })
+    .then(user => {
+      if (user.length) {
+        res.json(user[0]);
+      } else {
+        res.status(400).json("not found");
+      }
+    })
+    .catch(err => res.status(400).json("error getting user"));
 });
 
-app.listen(3001, () => {
-  console.log("listening on port 3001");
+app.post("/image/", (req, res) => {
+  const { id } = req.body;
+});
+
+app.listen(5000, () => {
+  console.log("listening on port 5000");
 });

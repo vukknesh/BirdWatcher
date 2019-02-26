@@ -13,16 +13,36 @@ class App extends Component {
     super(props);
     this.state = {
       route: "signin",
-      isSignedin: false
+      isSignedin: false,
+      user: {
+        id: "",
+        name: "",
+        email: "",
+        password: "",
+        entries: 0,
+        joined: ""
+      }
     };
   }
   componentDidMount() {
-    fetch("http://localhost:3001")
+    fetch("http://localhost:5000/")
       .then(response => response.json())
       .then(console.log);
   }
   onRouteChange = route => {
     this.setState({ route: route });
+  };
+  loadUser = data => {
+    this.setState({
+      user: {
+        email: data.email,
+        password: data.password,
+        name: data.name,
+        joined: data.joined,
+        id: data.id,
+        entries: data.entries
+      }
+    });
   };
   render() {
     return (
@@ -33,9 +53,12 @@ class App extends Component {
             <Searchbar />
           </div>
         ) : this.state.route === "signin" ? (
-          <Login onRouteChange={this.onRouteChange} />
+          <Login loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
         ) : (
-          <Register onRouteChange={this.onRouteChange} />
+          <Register
+            loadUser={this.loadUser}
+            onRouteChange={this.onRouteChange}
+          />
         )}
       </div>
     );
