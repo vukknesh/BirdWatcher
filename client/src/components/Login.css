@@ -1,0 +1,126 @@
+.container-login {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+}
+.subcontainer1 {
+  background: #1da1f2;
+  color: white;
+  width: 50%;
+  /* border: 5px solid black; */
+}
+.subb1 {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  /* border: 10px solid green; */
+  min-width: 150px;
+}
+.subb1 li {
+  display: flex;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+.subb1 i {
+  margin-right: 25px;
+}
+.subb1 .user {
+  margin-right: 15px;
+}
+
+.subcontainer2 {
+  width: 50%;
+  /* border: 5px solid black; */
+}
+.subsub2 {
+  position: relative;
+  top: 25%;
+  left: 25%;
+  right: 25%;
+  bottom: 25%;
+  /* border: 3px solid blue; */
+  height: 50vh;
+  width: 55%;
+}
+
+.logo-log {
+  /* border: 3px solid black; */
+  position: relative;
+  margin: 0;
+  padding: 20px;
+}
+
+.logo-log a {
+  border-radius: 50px;
+  border: 1px solid #1da1f2;
+  color: #1da1f2;
+  float: right;
+  top: 25%;
+  padding: 10px;
+  bottom: 25%;
+  position: relative;
+  font-weight: bold;
+}
+.bird {
+  color: #1da1f2;
+  font-size: 35px;
+}
+
+.logo-log a:hover {
+  background: #1da1f2;
+  color: white;
+}
+.left {
+  float: left;
+}
+
+.slogan {
+  /* border: 1px solid blueviolet; */
+  padding-top: 20px;
+  padding-bottom: 20px;
+  align-content: center;
+}
+.mini-slogan {
+  font-size: 12px;
+  font-weight: 500;
+  padding-top: 15px;
+  margin-bottom: 10px;
+}
+
+.join-btns {
+  display: flex;
+  flex-direction: column;
+}
+.join-btns a {
+  width: 100%;
+  font-family: "Segoe UI", Arial, sans-serif;
+  border-radius: 100px;
+  box-shadow: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+  padding: 5px 0px;
+  margin-bottom: 10px;
+  text-align: center;
+  white-space: nowrap;
+}
+.join-btns .signin {
+  background: #1da1f2;
+  color: white;
+  border: transparent;
+}
+.join-btns .signin:hover {
+  background: hsl(231, 98%, 49%);
+}
+.join-btns .register {
+  border: 1px solid #1da1f2;
+  color: #1da1f2;
+}
+
+.join-btns .register:hover {
+  background: #ccd5e0;
+}
