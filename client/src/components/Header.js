@@ -22,7 +22,9 @@ export default class Header extends Component {
                 <button className="borderlight">Register as a guide</button>
               </li>
               <li>
-                <button>Register</button>
+                <button onClick={() => this.props.onRouteChange("signin")}>
+                  Sign Out
+                </button>
               </li>
               <li>
                 <button>Login</button>

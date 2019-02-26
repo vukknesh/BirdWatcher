@@ -10,7 +10,7 @@ export default class Login extends Component {
             <ul>
               <li>
                 <i className="fas fa-search fa-2x" />
-                Follow your interets.
+                Follow your favorite birds.
               </li>
               <li>
                 <i class="fas fa-binoculars fa-2x" />
@@ -31,18 +31,24 @@ export default class Login extends Component {
               <a href="#">Log in</a>
             </div>
             <div className="slogan">
-              <h1>See whats happening in the world right now</h1>
+              <h1>See where can you go to find the next lifer.</h1>
             </div>
             <div className="mini-slogan">
               <p>Join BirdWatcher today.</p>
             </div>
             <div className="join-btns">
-              <a className="register" href="#">
-                Sign Up
-              </a>
-              <a className="signin" href="#">
+              <p
+                onClick={() => this.props.onRouteChange("register")}
+                className="register"
+              >
+                Register
+              </p>
+              <p
+                onClick={() => this.props.onRouteChange("home")}
+                className="signin"
+              >
                 Log In
-              </a>
+              </p>
             </div>
           </div>
         </div>
