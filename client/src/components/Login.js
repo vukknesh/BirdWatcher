@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./Login.css";
-import { userInfo } from "os";
 
 export default class Login extends Component {
   constructor(props) {
@@ -50,7 +49,7 @@ export default class Login extends Component {
             name="email"
           />
           <input
-            type="text"
+            type="password"
             onChange={this.onPasswordChange}
             placeholder="password"
             name="password"
