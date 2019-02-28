@@ -20,21 +20,19 @@ class App extends Component {
         email: "",
         password: "",
         entries: 0,
-        joined: ""
+        joined: "",
+        picture: ""
       }
     };
   }
-  componentDidMount() {
-    fetch("http://localhost:5000/")
-      .then(response => response.json())
-      .then(console.log);
-  }
+
   onRouteChange = route => {
     this.setState({ route: route });
   };
   loadUser = data => {
     this.setState({
       user: {
+        picture: data.picture.data.url,
         email: data.email,
         password: data.password,
         name: data.name,
@@ -44,16 +42,33 @@ class App extends Component {
       }
     });
   };
+
   render() {
     return (
       <div>
         {this.state.route === "home" ? (
           <div>
-            <Header onRouteChange={this.onRouteChange} />
+            <Header
+              user={this.state.user}
+              // user={this.loadUserFacebook}
+              onRouteChange={this.onRouteChange}
+            />
             <Searchbar />
+            <Hero />
+            <Hero2 />
+            <Footer />
           </div>
         ) : this.state.route === "signin" ? (
-          <Login loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+          <Login
+            loadUserFacebook={this.loadUserFacebook}
+            loadUser={this.loadUser}
+            onRouteChange={this.onRouteChange}
+          />
+        ) : this.state.rout === "register" ? (
+          <Register
+            loadUser={this.loadUser}
+            onRouteChange={this.onRouteChange}
+          />
         ) : (
           <Register
             loadUser={this.loadUser}

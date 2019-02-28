@@ -43,7 +43,6 @@ export default class Register extends Component {
   };
 
   render() {
-    const { onRouteChange } = this.props;
     return (
       <div>
         <div className="register-nav">

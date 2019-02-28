@@ -96,7 +96,7 @@ li {
   flex-direction: column;
   justify-content: center;
   min-height: 500px;
-  background-image: url("./img/watchers.jpg");
+  /* background-image: url("./img/watchers.jpg"); */
   background-repeat: no-repeat;
   height: 25rem;
   background-size: cover;
@@ -109,7 +109,7 @@ li {
   margin-top: 15px;
   margin-bottom: 2rem;
   min-height: 100px;
-  color: white;
+  color: black;
 }
 
 .SearchBar-sort-options ul {
@@ -155,6 +155,7 @@ li {
   border-radius: 4px;
   font-size: 0.77rem;
   font-weight: 500;
+  border: 1px solid grey;
 }
 
 .SearchBar-fields input:last-child {

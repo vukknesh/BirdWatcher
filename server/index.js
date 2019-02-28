@@ -18,9 +18,7 @@ const db = knex({
 
 db.select("*")
   .from("users")
-  .then(data => {
-    console.log(data);
-  });
+  .then(data => {});
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -29,7 +27,7 @@ app.get("/", (req, res) => {
   res.send();
 });
 
-app.post("/signin", (req, res) => {
+app.post("/signin/", (req, res) => {
   db.select("email", "hash")
     .from("login")
     .where("email", "=", req.body.email)
@@ -54,6 +52,34 @@ app.post("/signin", (req, res) => {
     .catch(err => res.status(400).json("wrong pass or email"));
 });
 
+app.post("/facebook/", (req, res) => {
+  db.select("email")
+    .from("login")
+    .where("email", "=", req.body.email)
+    .then(data => {
+      if (data) {
+        console.log(data);
+        return db
+          .select("*")
+          .from("users")
+          .where("email", "=", req.body.email)
+          .then(user => {
+            res.json(user[0]);
+            console.log("usuario " + user[0]);
+          })
+          .catch(err => {
+            console.log("unable");
+            res.status(400).json("unable");
+          });
+      } else {
+        res.status(400).json("invalid");
+        console.log("invalid");
+      }
+    })
+    .catch(err => res.json("wrong"));
+  console.log("wrong");
+});
+
 app.post("/register", (req, res) => {
   const { email, name, password } = req.body;
   const hash = bcrypt.hashSync(password);
@@ -61,6 +87,33 @@ app.post("/register", (req, res) => {
     trx
       .insert({
         hash: hash,
+        email: email
+      })
+      .into("login")
+      .returning("email")
+      .then(loginEmail => {
+        return trx("users")
+          .returning("*")
+          .insert({
+            email: loginEmail[0],
+            name: name,
+            joined: new Date()
+          })
+          .then(user => {
+            res.json(user[0]);
+          });
+      })
+      .then(trx.commit)
+      .catch(trx.rollback);
+  }).catch(err => res.status(400).json("email alredy exists"));
+});
+
+app.post("/registerfacebook/", (req, res) => {
+  const { email, name } = req.body;
+
+  db.transaction(trx => {
+    trx
+      .insert({
         email: email
       })
       .into("login")
