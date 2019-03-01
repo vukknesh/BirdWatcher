@@ -7,10 +7,13 @@ import Footer from "./components/Footer";
 import Searchbar from "./components/Searchbar";
 import Login from "./components/Login";
 import Register from "./components/Register/Register";
+import { Provider } from "react-redux";
+import store from "./store";
 
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       route: "signin",
       isSignedin: false,
@@ -45,37 +48,39 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.route === "home" ? (
-          <div>
-            <Header
-              user={this.state.user}
-              // user={this.loadUserFacebook}
+      <Provider store={store}>
+        <div>
+          {this.state.route === "home" ? (
+            <div>
+              <Header
+                user={this.state.user}
+                // user={this.loadUserFacebook}
+                onRouteChange={this.onRouteChange}
+              />
+              <Searchbar />
+              <Hero />
+              <Hero2 />
+              <Footer />
+            </div>
+          ) : this.state.route === "signin" ? (
+            <Login
+              loadUserFacebook={this.loadUserFacebook}
+              loadUser={this.loadUser}
               onRouteChange={this.onRouteChange}
             />
-            <Searchbar />
-            <Hero />
-            <Hero2 />
-            <Footer />
-          </div>
-        ) : this.state.route === "signin" ? (
-          <Login
-            loadUserFacebook={this.loadUserFacebook}
-            loadUser={this.loadUser}
-            onRouteChange={this.onRouteChange}
-          />
-        ) : this.state.rout === "register" ? (
-          <Register
-            loadUser={this.loadUser}
-            onRouteChange={this.onRouteChange}
-          />
-        ) : (
-          <Register
-            loadUser={this.loadUser}
-            onRouteChange={this.onRouteChange}
-          />
-        )}
-      </div>
+          ) : this.state.rout === "register" ? (
+            <Register
+              loadUser={this.loadUser}
+              onRouteChange={this.onRouteChange}
+            />
+          ) : (
+            <Register
+              loadUser={this.loadUser}
+              onRouteChange={this.onRouteChange}
+            />
+          )}
+        </div>
+      </Provider>
     );
   }
 }

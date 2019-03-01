@@ -5,7 +5,7 @@ export default class Header extends Component {
     console.log(this.props.user);
     return (
       <div className="header-container">
-        <img src={this.props.user.picture} alt="You" />
+        <img src={this.props.user.picture} alt={this.props.user.name} />
         <div>
           <ul>
             <li>
