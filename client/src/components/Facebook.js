@@ -24,16 +24,12 @@ export default class Facebook extends Component {
       .then(response => response.json())
 
       .then(user => {
-        console.log("Resposta = " + user);
         if (user) {
-          if (this.state.isLoggedIn) {
-            this.props.loadUser(this.state);
-            this.props.onRouteChange("home");
-          } else {
-            console.log("estou no else de cima");
-            this.props.onRouteChange("register");
-          }
+          this.setState({ isLoggedIn: true });
+          this.props.loadUser(this.state);
+          this.props.onRouteChange("home");
         } else {
+          this.props.onRouteChange("register");
         }
       })
       .catch(err => {
@@ -62,7 +58,6 @@ export default class Facebook extends Component {
 
   responseFacebook = response => {
     this.setState({
-      isLoggedIn: true,
       userID: response.userID,
       name: response.name,
       email: response.email,

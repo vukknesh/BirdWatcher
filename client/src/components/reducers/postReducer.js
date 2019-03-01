@@ -1,16 +1,21 @@
-import { FETCH_POSTS, NEW_POST } from "../actions/types";
+import { FETCH_USERS, NEW_USER } from "../actions/types";
 
 const initialState = {
-  items: [],
-  item: {}
+  users: [],
+  user: {}
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case FETCH_POSTS:
+    case FETCH_USERS:
       return {
         ...state,
-        items: action.payload
+        users: action.payload
+      };
+    case NEW_USER:
+      return {
+        ...state,
+        user: action.payload
       };
     default:
       return state;
